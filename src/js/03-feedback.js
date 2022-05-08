@@ -15,17 +15,8 @@ inputDataSave();
  
 
 function onInputChange(event) {
-    const {
-        elements: { email, message },
-    } = event.currentTarget;
-
-    userInputData = {
-        email: email.value,
-        message: message.value
-    };
-    if (email.value === "" || message.value === "") {
-        console.log("Please fill all fields");
-    }
+   
+    userInputData[event.target.name] = event.target.value;
     localStorage.setItem(STORAGE_KEY, JSON.stringify(userInputData));
     }
     
@@ -34,6 +25,7 @@ function onFormSubmit(event) {
     event.preventDefault();
     event.currentTarget.reset();
     localStorage.removeItem(STORAGE_KEY);
+    console.log(userInputData);
 }
 
 function inputDataSave() {
@@ -42,6 +34,7 @@ function inputDataSave() {
         const parcedData = JSON.parse(savedData);
         formEmail.value = parcedData.email;
         formMessage.value = parcedData.message;
+        
     }
 }
 
