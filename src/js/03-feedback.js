@@ -10,31 +10,35 @@ feedbackForm.addEventListener('submit', onFormSubmit);
 
 const STORAGE_KEY = "feedback-form-state";
 
-let userInputData = {};
-inputDataSave();
- 
+const userInputData = {email:'',message:''};
 
 function onInputChange(event) {
-   
     userInputData[event.target.name] = event.target.value;
     localStorage.setItem(STORAGE_KEY, JSON.stringify(userInputData));
     }
     
 
-function onFormSubmit(event) {
-    event.preventDefault();
-    event.currentTarget.reset();
-    localStorage.removeItem(STORAGE_KEY);
-    console.log(userInputData);
-}
-
-function inputDataSave() {
+function fillFormfromStorage() {
     const savedData = localStorage.getItem(STORAGE_KEY);
     if (savedData) {
         const parcedData = JSON.parse(savedData);
         formEmail.value = parcedData.email;
         formMessage.value = parcedData.message;
-        
     }
 }
 
+function onFormSubmit(event) {
+    event.preventDefault();
+
+     const inputData = {
+    email: formEmail.value,
+    message: formMessage.value,
+  };
+    console.log("User data:", inputData);
+
+    event.currentTarget.reset();
+    localStorage.removeItem(STORAGE_KEY);
+    
+}
+
+fillFormfromStorage();
