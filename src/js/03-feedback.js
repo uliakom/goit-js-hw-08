@@ -12,9 +12,11 @@ const STORAGE_KEY = "feedback-form-state";
 
 const userInputData = {email:'',message:''};
 
-function onInputChange(event) {
-    userInputData[event.target.name] = event.target.value;
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(userInputData));
+function onInputChange() {
+    userInputData['email'] = formEmail.value;
+    userInputData['message'] = formMessage.value;
+    
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(userInputData));
     }
     
 
